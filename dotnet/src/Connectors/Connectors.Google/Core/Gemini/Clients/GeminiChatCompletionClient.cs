@@ -122,6 +122,7 @@ internal sealed class GeminiChatCompletionClient : ClientBase
     /// <param name="location">The region to process the request</param>
     /// <param name="projectId">Project ID from google cloud</param>
     /// <param name="apiVersion">Version of the Vertex API</param>
+    /// <param name="isFineTunedModel">Whether this is a tuned model or not</param>
     /// <param name="logger">Logger instance used for logging (optional)</param>
     public GeminiChatCompletionClient(
         HttpClient httpClient,

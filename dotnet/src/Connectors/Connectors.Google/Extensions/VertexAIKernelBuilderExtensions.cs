@@ -27,6 +27,7 @@ public static class VertexAIKernelBuilderExtensions
     /// <param name="location">The location to process the request</param>
     /// <param name="projectId">Your project ID</param>
     /// <param name="apiVersion">The version of the Vertex API.</param>
+    /// <param name="isFineTunedModel">Whether this is a tuned model or not</param>
     /// <param name="serviceId">The optional service ID.</param>
     /// <param name="httpClient">The optional custom HttpClient.</param>
     /// <returns>The updated kernel builder.</returns>
