@@ -130,6 +130,7 @@ internal sealed class GeminiChatCompletionClient : ClientBase
         string location,
         string projectId,
         VertexAIVersion apiVersion,
+        bool isFineTunedModel = false,
         ILogger? logger = null)
         : base(
             httpClient: httpClient,
@@ -144,8 +145,17 @@ internal sealed class GeminiChatCompletionClient : ClientBase
         string versionSubLink = GetApiVersionSubLink(apiVersion);
 
         this._modelId = modelId;
-        this._chatGenerationEndpoint = new Uri($"https://{location}-aiplatform.googleapis.com/{versionSubLink}/projects/{projectId}/locations/{location}/publishers/google/models/{this._modelId}:generateContent");
-        this._chatStreamingEndpoint = new Uri($"https://{location}-aiplatform.googleapis.com/{versionSubLink}/projects/{projectId}/locations/{location}/publishers/google/models/{this._modelId}:streamGenerateContent?alt=sse");
+
+        if (isFineTunedModel)
+        {
+            this._chatGenerationEndpoint = new Uri($"https://{location}-aiplatform.googleapis.com/{versionSubLink}/projects/{projectId}/locations/{location}/endpoints/{this._modelId}:generateContent");
+            this._chatStreamingEndpoint = new Uri($"https://{location}-aiplatform.googleapis.com/{versionSubLink}/projects/{projectId}/locations/{location}/endpoints/{this._modelId}:streamGenerateContent?alt=sse");
+        }
+        else
+        {
+            this._chatGenerationEndpoint = new Uri($"https://{location}-aiplatform.googleapis.com/{versionSubLink}/projects/{projectId}/locations/{location}/publishers/google/models/{this._modelId}:generateContent");
+            this._chatStreamingEndpoint = new Uri($"https://{location}-aiplatform.googleapis.com/{versionSubLink}/projects/{projectId}/locations/{location}/publishers/google/models/{this._modelId}:streamGenerateContent?alt=sse");
+        }
     }
 
     /// <summary>

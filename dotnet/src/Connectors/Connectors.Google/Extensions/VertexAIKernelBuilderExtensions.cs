@@ -42,6 +42,7 @@ public static class VertexAIKernelBuilderExtensions
         string location,
         string projectId,
         VertexAIVersion apiVersion = VertexAIVersion.V1,
+        bool isFineTunedModel = false,
         string? serviceId = null,
         HttpClient? httpClient = null)
     {
@@ -58,6 +59,7 @@ public static class VertexAIKernelBuilderExtensions
                 location: location,
                 projectId: projectId,
                 apiVersion: apiVersion,
+                isFineTunedModel: isFineTunedModel,
                 httpClient: HttpClientProvider.GetHttpClient(httpClient, serviceProvider),
                 loggerFactory: serviceProvider.GetService<ILoggerFactory>()));
         return builder;

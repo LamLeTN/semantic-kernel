@@ -37,9 +37,10 @@ public sealed class VertexAIGeminiChatCompletionService : IChatCompletionService
         string location,
         string projectId,
         VertexAIVersion apiVersion = VertexAIVersion.V1,
+        bool isFineTunedModel = false,
         HttpClient? httpClient = null,
         ILoggerFactory? loggerFactory = null)
-        : this(modelId, () => new ValueTask<string>(bearerKey), location, projectId, apiVersion, httpClient, loggerFactory)
+        : this(modelId, () => new ValueTask<string>(bearerKey), location, projectId, apiVersion, isFineTunedModel, httpClient, loggerFactory)
     {
         Verify.NotNullOrWhiteSpace(bearerKey);
     }
@@ -65,6 +66,7 @@ public sealed class VertexAIGeminiChatCompletionService : IChatCompletionService
         string location,
         string projectId,
         VertexAIVersion apiVersion = VertexAIVersion.V1,
+        bool isFineTunedModel = false,
         HttpClient? httpClient = null,
         ILoggerFactory? loggerFactory = null)
     {
@@ -82,6 +84,7 @@ public sealed class VertexAIGeminiChatCompletionService : IChatCompletionService
             location: location,
             projectId: projectId,
             apiVersion: apiVersion,
+            isFineTunedModel: isFineTunedModel,
             logger: loggerFactory?.CreateLogger(typeof(VertexAIGeminiChatCompletionService)));
         this._attributesInternal.Add(AIServiceExtensions.ModelIdKey, modelId);
     }
